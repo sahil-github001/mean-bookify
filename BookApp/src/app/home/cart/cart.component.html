@@ -1,0 +1,141 @@
+<!-- search -->
+<app-all-products [ngStyle]="{'display':allProductDisplay}"></app-all-products>
+
+
+<!-- Cart -->
+<div class="container-fluid"  [ngStyle]="{'display':displayHome}">
+    <div class="container pb-5" *ngIf="errorMsg == '' " >
+        <div class="row py-3">
+            <div class="col">
+                <button type="button" class="bg-danger text-white p-2 rounded" (click)="deleteAllCart()"
+                    style="display:block; margin-left:auto;">clear all Cart</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 border-top border-start">
+                <div class="row py-1 border" *ngFor="let product of cartList, let i = index">
+                    <div class="col-4 p-3">
+                        <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                            <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                        </button>
+                    </div>
+                    <div class="col-8 pt-3">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text authorText pt-2">{{product.author}}</p>
+                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <p class="card-text text-success">{{product.discount}}% Off</p>
+                        <button class="btn btn-outline-danger" style="font-weight:600"
+                            (click)="deleteCart(product, i)">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 border p-3  priceDetail text-center">
+                <h6 class="border-bottom pb-2">PRICE DETAILS</h6>
+                <div class="row px-2 text2">
+                    <div class="col text-start">
+                        <p>Price</p>
+                    </div>
+                    <div class="col text-end">
+                        <p>Rs{{realPrice}}</p>
+                    </div>
+                </div>
+                <div class="row px-2 text2">
+                    <div class="col text-start">
+                        <p>Discount</p>
+                    </div>
+                    <div class="col text-end">
+                        <p>Rs{{totalDiscount}}</p>
+                    </div>
+                </div>
+                <div class="row px-2 border-bottom text2">
+                    <div class="col text-start">
+                        <p>Delivery Charge</p>
+                    </div>
+                    <div class="col text-end ">
+                        <p class="text-success">Free</p>
+                    </div>
+                </div>
+                <div class="row px-2 py-2 border-bottom" style="font-weight:700; font-size: 110%;">
+                    <div class="col text-start">
+                        <p>Total</p>
+                    </div>
+                    <div class="col text-end ">
+                        <p>Rs{{total}}</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="button" (click)="openPopup2()" class="bg-warning text-white rounded p-2">Check
+                            Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<!-- empty cart  -->
+<div class="container-fluid" [ngStyle]="{'display':displayHome}">
+    <div class="container my-5 pb-5" *ngIf="errorMsg">
+        <div class="row">
+            <div class="col-12 text-center emptCart">
+                <img src="../../../assets/image/empty-cart.png" width="200" alt="">
+                <h1 class="mt-4 pb-3">Yout Cart is Empty</h1>
+                <h4 class="pb-2">Add a few product and come here to checkout.</h4>
+                <button type="button" routerLink="" class="bg-success text-white rounded py-2 px-3">CONTINUE
+                    SHOPPING</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<!--modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{modalTitle}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-danger">₹{{modalPrice}}</h4>
+                <p>by <b>{{modalAuthor}}</b> </p>
+                <p>{{modalDate}} </p>
+                <p>{{modalDescription}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="text-white bg-danger p-2 rounded fas fa-times"
+                    (click)="closePopup()"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--modal for orders -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle2}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Address</h3>
+            </div>
+            <div class="modal-body">
+                <input [(ngModel)]="name" name="name" type="text" class="w-100 border rounded p-2 mt-2" placeholder="Name">
+                <input [(ngModel)]="address" name="Address" type="text" class="w-100 border rounded p-2 mt-2" placeholder="Address">
+                <input [(ngModel)]="state" name="State" type="text" class="w-100 border rounded p-2 mt-2" placeholder="States">
+                <input [(ngModel)]="city" name="city" type="text" class="w-100 border rounded p-2 mt-2" placeholder="City">
+                <input [(ngModel)]="pincode" name="Pincode" type="text" class="w-100 border rounded p-2 mt-2" placeholder="Mobile no">
+                <h4 class="text-success py-3">Total : ₹{{total}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="text-white bg-danger p-2 rounded fas fa-times"
+                    (click)="closePopup2()"></button>
+                <button type="button" class="bg-success text-white p-2 rounded" (click)="orderNow()">Order Now</button>
+            </div>
+        </div>
+    </div>
+</div>

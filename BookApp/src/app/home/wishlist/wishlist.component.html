@@ -1,0 +1,78 @@
+<!-- search -->
+<app-all-products [ngStyle]="{'display':allProductDisplay}"></app-all-products>
+
+
+
+<div class="container-fluid " *ngIf="errorMsg == '' " [ngStyle]="{'display':displayHome}">
+    <div class="row  text-center wish">
+        <h4 class="text-white pt-2" style="font-weight:bold">WISHLIST</h4>
+    </div>
+    <div class="container-fluid">
+        <div class="row pt-1">
+            <div class="col">
+                <button type="button" class="bg-danger text-white p-2 rounded" (click)="deleteAllWish()"
+                    style="display:block; margin-left:auto;">clear all wishlist</button>
+            </div>
+        </div>
+    </div>
+    <div class="container topSec">
+        <div class="row border-bottom border-danger pb-4">
+            <div class="col-sm-6 col-md-3 pt-5 text-center" *ngFor="let product of wishList,let i = index ">
+                <div class="card m-auto" style="width: 16rem; border: none;">
+                    <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                        <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                    </button>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text authorText">{{product.author}}</p>
+                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <div>
+                            <button class="btn btn-outline-danger mt-auto mx-3" (click)="deleteWish(product,i)"><i
+                                    class="fa fa-trash "></i></button>
+                            <button class="btn btn-outline-success mt-auto mx-3" (click)="addToCart(product)"><i
+                                    class="fa fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- empty wishlist  -->
+<div class="container mt-5 pb-5 mb-5" *ngIf="errorMsg" [ngStyle]="{'display':displayHome}">
+    <div class="row">
+        <div class="col-12 text-center noWish">
+            <img src="../../../assets/image/wishlist.jpeg" width="200" alt="">
+            <h1 class="pb-3 pt-3">Your WishList is empty</h1>
+            <h4 class="pb-2">Browse Product and add them to your <br>wishlist to see them here</h4>
+            <button type="button" routerLink="" class="bg-success text-white rounded py-2 px-3">CONTINUE
+                SHOPPING</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!--modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{modalTitle}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-danger">₹{{modalPrice}}</h4>
+                <h5 class="text-success">{{modalDiscount}}% Off</h5>
+                <p>by <b>{{modalAuthor}}</b> </p>
+                <p>{{modalDate}} </p>
+                <p>{{modalDescription}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="text-white bg-danger p-2 rounded fas fa-times"
+                    (click)="closePopup()"></button>
+            </div>
+        </div>
+    </div>
+</div>

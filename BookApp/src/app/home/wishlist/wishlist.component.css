@@ -1,0 +1,32 @@
+.bookIconImg {
+    width: 180px;
+    height: 270px;
+    transition: .5s;
+}
+
+.bookIconImg:hover {
+    transform: scale(1.07);
+}
+
+.wish {
+    letter-spacing: 3px;
+    background-color: #20262E;
+}
+
+.card-title {
+    color: #20262E;
+    font-weight: 800;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.noWish h1 {
+    font-weight: bold;
+    color: #20262E;
+}
+
+.noWish h4 {
+    color: #20262E;
+}

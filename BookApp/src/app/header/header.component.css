@@ -1,0 +1,48 @@
+.fas {
+    color: #20262E;
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: #20262E;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+form {
+    border: 1px solid rgb(212, 207, 207);
+}
+
+.fa-search {
+    margin: auto;
+    font-size: 30px;
+}
+
+input {
+    border: none;
+}
+
+.form-control:focus {
+    border-color: white;
+    box-shadow: 0 0 0 0rem rgba(250, 250, 250);
+}
+
+.icons button {
+    font-size: 25px;
+    display: inline-block;
+    margin: 0 10px;
+    margin-top: 5px;
+}
+
+@media(max-widht:555px) {
+    * {
+        text-align: center;
+        align-items: center;
+    }
+}

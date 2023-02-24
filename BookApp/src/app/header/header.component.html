@@ -1,0 +1,21 @@
+<div class="container-fluid bg-light">
+    <div class="container " style="z-index:1">
+        <div class="row">
+            <div class="col-lg-4 p-3">
+                <i class="fas fa-book fa-2x"></i>
+                <a class="navbar-brand ms-1" routerLink="">Bookify</a>
+            </div>
+            <div class="col-lg-5 col-sm-8 col-xs-8 p-3">
+                <form class="d-flex p-1 rounded" role="search">
+                    <input (keyup)="search($event)" class="form-control me-2 " placeholder="Search" aria-label="Search">
+                    <label for="search" class="fas fa-search"></label>
+                </form>
+            </div>
+            <div class="col-lg-3 col-sm-4 col-xs-4 text-end p-3 icons">
+                <button class="fas fa-heart bg-light" routerLink="home/wishlist"></button>
+                <button class="fas fa-shopping-cart bg-light" routerLink="home/cart"></button>
+                <button class="fas fa-user bg-light" (click)="loginCall()"></button>
+            </div>
+        </div>
+    </div>
+</div>

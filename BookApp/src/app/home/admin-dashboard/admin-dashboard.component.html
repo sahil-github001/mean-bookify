@@ -1,0 +1,122 @@
+
+
+
+
+
+<div class="container-fluid mb-5" [ngStyle]="{'display':displayDashboard}">
+    <div class="row  text-center wish">
+        <h4 class="text-white pt-2 bg-warning" style="font-weight:bold">ADMIN</h4>
+    </div>
+    <div class="row">
+        <div class="col-2 ms-auto">
+            <button (click)="showOrderList()" class="btn btn-primary">Show All Orders</button>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="container-fluid topSec">
+            <div class="row  pb-4">
+                <div class="col-sm-6 col-md-3 pt-5 text-center" *ngFor="let product of allProducts">
+                    <div class="card m-auto border" style="width: 20rem; border: none;">
+
+                        <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                            <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                        </button>
+                        <div class="card-body">
+                            <h5 class="card-title">{{product.name}}</h5>
+                            <p class="card-text authorText">{{product.author}}</p>
+                            <p class="card-text text-danger">₹{{product.price}}</p>
+                            <p class="text-success">Discount <span>{{product.discount}}</span>%</p>
+                            <p>{{product.category}}</p>
+                            <p>{{product.date}}</p>
+                            <div>
+                                <button class="btn btn-primary text-white" (click)="openPopup(product)">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <input [(ngModel)]="editTitle" type="text" class="border w-75 p-2" placeholder="Edit Title">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changeTitle()">Edit</button>
+                <br><br>
+
+                <input [(ngModel)]="editAuthor" type="text" class="border w-75 p-2" placeholder="Edit Author">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changeAuthor()">Edit</button>
+                <br><br>
+
+                <input [(ngModel)]="editPrice" type="text" class="border w-75 p-2" placeholder="Edit Price">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changePrice()">Edit</button>
+                <br><br>
+
+                <input [(ngModel)]="editCategory" type="text" class="border w-75 p-2" placeholder="Edit Category">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changeCategory()">Edit</button>
+                <br><br>
+
+                <input [(ngModel)]="editDiscount" type="text" class="border w-75 p-2" placeholder="Edit Discount">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changeDiscount()">Edit</button>
+                <br><br>
+
+                <input [(ngModel)]="editDate" type="text" class="border w-75 p-2" placeholder="Edit Date">
+                <button class="btn btn-outline-warning  mt-auto mx-3" (click)="changeDate()">Edit</button>
+                <br><br>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="text-white bg-danger p-2 rounded fas fa-times"
+                    (click)="closePopup()"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- order -->
+<div class="container" [ngStyle]="{'display':displayOrder}">
+    <div class="row mt-3">
+        <div class="col-2 ms-auto">
+            <button type="button" class="text-white bg-danger p-3 rounded fas fa-times"(click)="hideOrderList()"></button>
+        </div>
+    </div>
+    
+    <div class="row  m-5 rounded" *ngFor="let order of orderList" style="background-color:#333; color:white;">
+        <div class="col-12 bg-secondary" style="border-bottom:white 1px solid">
+            <p>Order Id: {{order['id']}}  </p>  
+            <p>Email : {{order['email']}} </p>
+            <p>User Name : {{order['userName']}}</p>
+        </div>
+
+        <div class="row w-50" style="border:1px white solid; border-top:none">
+            <div class="col-12 " *ngFor=" let product of order['product'], let i = index">
+                <p>{{i + 1}} . {{product.name}}</p>  
+            </div>
+        </div>
+
+        <div class="row w-50 ps-5" >
+                <div class="row" >
+                    <div class="col-12 ">
+                        <h4>Address </h4>
+                        <p>name : {{order['address']['name']}}</p>
+                        <p>{{order['address']['address']}}</p>
+                        <p>city : {{order['address']['city']}}</p>
+                        <p>state : {{order['address']['state']}}</p>
+                        <p>phone : {{order['address']['pincode']}}</p>
+                    </div>
+                </div>
+                <div class="row" >
+                    <p>{{order['date']}}</p>
+                    <p>Total Amount : {{order['price']}}</p>
+                </div>
+        </div>
+    </div>
+</div>

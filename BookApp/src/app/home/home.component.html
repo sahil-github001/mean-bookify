@@ -1,0 +1,219 @@
+<!-- home header -->
+
+<app-all-products [ngStyle]="{'display':allProductDisplay}"></app-all-products>
+
+
+<div [ngStyle]="{'display':displayHome}">
+    <div class="header py-3">
+        <a routerLink="newArrival"><b>Discover New Arrival Books</b> ></a>
+    </div>
+
+    <!-- content 1 -->
+    <div class="container-fluid content1 p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 p-2 part1">
+                    <h3>Welcome to Bookify</h3>
+                    <p>"Explore a world of books at your fingertips. Shop a wide selection, including bestsellers and
+                        hard-to-find titles, with fast and convenient delivery."</p>
+                </div>
+                <div class="col-lg-6  part2">
+                    <div class="bgImg1"></div>
+                    <div class="bgImg2">
+                        <img src="../../assets/image/book-5.png" alt="book5">
+                        <img src="../../assets/image/book-2.png" alt="book2">
+                        <img src="../../assets/image/book-4.png" alt="book4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- content 2 -->
+    <div class="container py-5">
+        <div class="row content2">
+            <div class="col-sm-6 col-md-3">
+                <div class="row">
+                    <div class="col-2"><i class="fas fa-shipping-fast fa-2x"></i></div>
+                    <div class="col">
+                        <h3>Free Shipping</h3>
+                        <p>Order over 500₹</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="row">
+                    <div class="col-2"><i class="fas fa-lock fa-2x"></i></div>
+                    <div class="col">
+                        <h3>Secure Payment</h3>
+                        <p>100% Secure Payment</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="row">
+                    <div class="col-2"><i class="fas fa-redo-alt fa-2x"></i></div>
+                    <div class="col">
+                        <h3>Easy Returns</h3>
+                        <p>10 Days Returns</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="row">
+                    <div class="col-2"><i class="fas fa-headset fa-2x"></i></div>
+                    <div class="col">
+                        <h3>24/7 Support</h3>
+                        <p>Call Us Anytime</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- bestsellers -->
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold">Best Sellers</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container topSec">
+        <div class="row  border-top pb-4">
+            <div class="col-sm-6 col-md-3 pt-5 text-center" *ngFor="let product of bestSeller ">
+                <div class="card m-auto" style="width: 16rem; border: none;">
+                    <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                        <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                    </button>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text authorText">{{product.author}}</p>
+                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <div>
+                            <button class="btn btn-outline-danger mt-auto mx-3" (click)="addToWishlist(product)"><i
+                                    class="fa fa-heart"></i></button>
+                            <button class="btn btn-outline-success mt-auto mx-3" (click)="addToCart(product)"><i
+                                    class="fa fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a routerLink="bestSellers" class="text-center mt-5" style="color:#131a24;">See All</a>
+        </div>
+    </div>
+
+
+    <!-- fiction -->
+    <div class="container-fluid mb-2 mt-4">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold">Fiction Books</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container topSec">
+        <div class="row  border-top pb-4">
+            <div class="col-sm-6 col-md-3 pt-5 text-center" *ngFor="let product of topFiction ">
+                <div class="card m-auto" style="width: 16rem; border: none;">
+                    <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                        <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                    </button>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text authorText">{{product.author}}</p>
+                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <div>
+                            <button class="btn btn-outline-danger mt-auto mx-3" (click)="addToWishlist(product)"><i
+                                    class="fa fa-heart"></i></button>
+                            <button class="btn btn-outline-success mt-auto mx-3" (click)="addToCart(product)"><i
+                                    class="fa fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a routerLink="fiction" class="text-center mt-5" style="color:#131a24;">See All</a>
+        </div>
+    </div>
+
+
+
+    <!-- deal of the day -->
+    <div class="container-fluid">
+        <div class="row deal py-5">
+            <div class="col ms-5 ps-5">
+                <h3 class="mt-4">Deal Of The Day</h3>
+                <h1 class="text-success" style="font-weight:bold;">Upto 50% Off</h1>
+                <p>Specially Curated Books, Just For You <br>
+                    Best-Selling Books Are On Sale. Updated Hourly !
+                </p>
+                <!-- <button type="button" class="btn btn-success">Shop Now</button> -->
+            </div>
+
+            <div class="col pe-5 pe-5">
+                <img src="../../assets/image/deal-img.jpg" alt="" class="dealImg" width="500px">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- new arrivals  -->
+    <div class="container-fluid mb-1 mt-5">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center fw-bold">New Arrivals</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container topSec">
+        <div class="row border-bottom border-top pb-4">
+            <div class="col-sm-6 col-md-3 pt-5 text-center" *ngFor="let product of topNewArrival">
+                <div class="card m-auto" style="width: 16rem; border: none;">
+                    <button type="button" style="background-color: #fff;" (click)="openPopup(product)">
+                        <img src="{{product.image}}" class="card-img-top m-auto bookIconImg" alt="...">
+                    </button>
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text authorText">{{product.author}}</p>
+                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <div>
+                            <button class="btn btn-outline-danger mt-auto mx-3" (click)="addToWishlist(product)"><i
+                                    class="fa fa-heart"></i></button>
+                            <button class="btn btn-outline-success mt-auto mx-3" (click)="addToCart(product)"><i
+                                    class="fa fa-cart-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a routerLink="newArrival" class="text-center mt-5" style="color:#131a24;">See All</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!--modal -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}" >
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h3 class="modal-title">{{modalTitle}}</h3>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-danger">₹{{modalPrice}}</h4>
+                <h5 class="text-success">{{modalDiscount}}% Off</h5>
+                <p>by <b>{{modalAuthor}}</b> </p>
+                <p>{{modalDate}} </p>
+                <p>{{modalDescription}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="text-white bg-danger p-2 rounded fas fa-times"
+                    (click)="closePopup()"></button>
+            </div>
+        </div>
+    </div>
+</div>

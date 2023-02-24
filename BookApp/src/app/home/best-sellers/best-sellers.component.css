@@ -1,0 +1,28 @@
+.bookIconImg {
+    width: 180px;
+    height: 270px;
+    transition: .5s;
+}
+
+.bookIconImg:hover {
+    transform: scale(1.07);
+}
+
+.card-title {
+    color: #20262E;
+    font-weight: 800;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.authorText {
+    color: #444;
+}
+
+
+.modal-title {
+    font-weight: bolder;
+    color: #20262E;
+}

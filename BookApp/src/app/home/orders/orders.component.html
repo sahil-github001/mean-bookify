@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row  m-5 rounded" *ngFor="let order of orderList" style="background-color:#333; color:white;">
+        <div class="col-12 bg-secondary" style="border-bottom:white 1px solid">
+            Order Id: {{order['id']}}
+        </div>
+
+        <div class="row w-50" style="border:1px white solid; border-top:none">
+            <div class="col-12 " *ngFor=" let product of order['product'], let i = index">
+                <p>{{i + 1}} . {{product.name}}</p>  
+            </div>
+        </div>
+
+        <div class="row w-50 ps-5" >
+                <div class="row" >
+                    <div class="col-12 ">
+                        <h4>Address </h4>
+                        <p>name : {{order['address']['name']}}</p>
+                        <p>{{order['address']['address']}}</p>
+                        <p>city : {{order['address']['city']}}</p>
+                        <p>state : {{order['address']['state']}}</p>
+                    </div>
+                </div>
+                <div class="row" >
+                    <p>{{order['date']}}</p>
+                    <p>Total Amount : {{order['price']}}</p>
+                </div>
+                
+          
+        </div>
+      
+    </div>
+</div>
+
+<div [ngStyle]="{'display':displayNoOrder}">
+    you dont ordered anything
+</div>

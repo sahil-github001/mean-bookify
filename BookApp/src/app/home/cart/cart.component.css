@@ -1,0 +1,56 @@
+.bookIconImg {
+    width: 180px;
+    height: 270px;
+    transition: .5s;
+}
+
+.bookIconImg:hover {
+    transform: scale(1.07);
+}
+
+.wish {
+    letter-spacing: 3px;
+    background-color: #20262E;
+}
+
+.card-title {
+    color: #20262E;
+    font-weight: 800;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.emptCart h1 {
+    font-weight: bold;
+    color: #20262E;
+}
+
+.emptCart h4 {
+    color: #20262E;
+}
+
+.priceDetail h6 {
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgb(102, 100, 100);
+}
+
+.text2 {
+    font-size: 105%;
+}
+
+@media(max-width:1000px) {
+    .bookIconImg {
+        width: 150px;
+        height: 225px;
+    }
+}
+
+@media(max-width:555px) {
+    .bookIconImg {
+        width: 120px;
+        height: 180px;
+    }
+}
