@@ -48,9 +48,11 @@ export class NewArrivalComponent implements OnInit {
   }
 
   getAllNerArrival() {
-    this.api.getAllNewArrival().subscribe(
-      (data: any) => {
-        this.newArrival = data.products;
+    this.api.getAllProducts().subscribe(
+      (data:any) => {
+        data.products.map((products:any) => {
+          if(products.category == 'New Arrival'){this.newArrival.push(products)}
+        })
       }
     )
   }
@@ -67,14 +69,7 @@ export class NewArrivalComponent implements OnInit {
         }
       )
     }else{
-      this.api.addToWishlist(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login')
     }
   }
   
@@ -90,14 +85,7 @@ export class NewArrivalComponent implements OnInit {
         }
       )
     }else {
-      this.api.addToCart(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login')
     }
   }
   // modal

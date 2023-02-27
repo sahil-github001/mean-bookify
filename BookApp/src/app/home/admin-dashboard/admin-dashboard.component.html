@@ -95,6 +95,11 @@
             <p>Email : {{order['email']}} </p>
             <p>User Name : {{order['userName']}}</p>
         </div>
+        <div class="col-12 bg-secondary">
+            Status: {{order['status']}}
+            <button *ngIf="order['status'] == 'Not delivered'" class="btn bg-success text-white"
+                (click)="delivered(order['id'], order['email'])">change status to Delivered</button>
+        </div>
 
         <div class="row w-50" style="border:1px white solid; border-top:none">
             <div class="col-12 " *ngFor=" let product of order['product'], let i = index">

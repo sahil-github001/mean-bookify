@@ -29,164 +29,96 @@ export class AdminDashboardComponent implements OnInit {
 
   displayDashboard = 'block'
   displayOrder = 'none'
+  
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.getOrderList()
+
     this.api.getAllProducts().subscribe(
       (data: any) => {
         this.allProducts = data.products;
       }
     )
-
-    this.getOrderList()
   }
 
-  
-  getOrderList(){
+
+  getOrderList() {
     this.api.getOrderFromAdmin().subscribe(
-      (result:any) => {
+      (result: any) => {
         this.orderList = result.orderList
         console.log(this.orderList)
       },
-      (result:any) => {
+      (result: any) => {
+        alert(result.error.message)
+      }
+    )
+  }
+
+  editProductDetails(id: any, newValue: any, keyValue: any) {
+    this.api.editProductDetails(id, newValue, keyValue).subscribe(
+      (result: any) => {
+        if (result) {
+          alert(result.message)
+          this.displayStyle = "none";
+          this.editTitle = '';
+          this.editAuthor = '';
+          this.editDate = '';
+          this.editCategory = '';
+          this.editPrice = '';
+          this.editDiscount = '';
+          this.ngOnInit()
+        }
+      },
+      (result: any) => {
         alert(result.error.message)
       }
     )
   }
 
   changeTitle() {
-    if (this.editTitle == '') {
-      alert('Title is empty');
-    }
-    else {
-      this.api.changeName(this.modalId, this.editTitle).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editTitle = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editTitle == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editTitle, 'name')
   }
 
   changeAuthor() {
-    if (this.editAuthor == '') {
-      alert('input is empty');
-    }
-    else {
-      this.api.changeAuthor(this.modalId, this.editAuthor).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editAuthor = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editAuthor == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editAuthor, 'author')
   }
 
   changeCategory() {
-    if (this.editCategory == '') {
-      alert('input is empty');
-    }
-    else {
-      this.api.changeCategory(this.modalId, this.editCategory).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editCategory = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editCategory == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editCategory, 'category')
   }
 
   changePrice() {
-    if (this.editPrice == '') {
-      alert('input is empty');
-    }
-    else {
-      this.api.changePrice(this.modalId, this.editPrice).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editPrice = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editPrice == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editPrice, 'price')
   }
 
   changeDiscount() {
-    if (this.editDiscount == '') {
-      alert('input is empty');
-    }
-    else {
-      this.api.changeDiscount(this.modalId, this.editDiscount).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editDiscount = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editDiscount == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editDiscount, 'discount')
   }
 
   changeDate() {
-    if (this.editDate == '') {
-      alert('input is empty');
-    }
-    else {
-      this.api.changeDate(this.modalId, this.editDate).subscribe(
-        (result: any) => {
-          if (result) {
-            alert(result.message)
-            this.displayStyle = "none";
-            this.editDate = '';
-            this.ngOnInit()
-          }
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
-    }
+    this.editDate == '' ? alert('input is empty') : this.editProductDetails(this.modalId, this.editDate, 'date');
   }
 
-  showOrderList(){
+  showOrderList() {
     this.displayDashboard = 'none'
     this.displayOrder = 'block'
   }
-  hideOrderList(){
+  hideOrderList() {
     this.displayDashboard = 'block'
     this.displayOrder = 'none'
+  }
+
+  delivered(orderId: any, email: any) {
+    this.api.delivered(orderId, email).subscribe(
+      (result: any) => {
+        alert(result.message);
+        this.ngOnInit();
+      },
+      (result: any) => {
+        alert(result.error.message)
+      }
+    )
   }
 
 

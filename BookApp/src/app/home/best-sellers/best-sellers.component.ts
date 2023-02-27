@@ -26,19 +26,21 @@ export class BestSellersComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllBestSellers();
-  }
-
-  getAllBestSellers() {
-    this.api.getAllBestSellers().subscribe(
-      (data: any) => {
-        this.bestSeller = data.products;
-      }
-    )
 
     this.api.searchkey.subscribe(
       (data: any) => {
         this.check = data
         this.displayAllProduct()
+      }
+    )
+  }
+
+  getAllBestSellers() {
+    this.api.getAllProducts().subscribe(
+      (data:any) => {
+        data.products.map((products:any) => {
+          if(products.category == 'Best Sellers'){this.bestSeller.push(products)}
+        })
       }
     )
   }
@@ -66,14 +68,7 @@ export class BestSellersComponent implements OnInit {
         }
       )
     }else{
-      this.api.addToWishlist(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login');
     }
   }
   
@@ -89,14 +84,7 @@ export class BestSellersComponent implements OnInit {
         }
       )
     }else {
-      this.api.addToCart(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login');
     }
   }
 

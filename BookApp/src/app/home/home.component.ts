@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 
 
@@ -25,14 +26,13 @@ export class HomeComponent implements OnInit {
   displayHome = 'block'
   allProductDisplay = '';
   check = '';
+  
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router:Router) { }
 
   ngOnInit(): void {
-
-    this.getBestSellers()
-    this.getTopFiction()
-    this.getNewArrival()
+    this.getAllProducts()
+    
 
     this.api.searchkey.subscribe(
       (data: any) => {
@@ -41,6 +41,20 @@ export class HomeComponent implements OnInit {
       }
     )
   }
+
+  getAllProducts(){
+    this.api.getAllProducts().subscribe(
+      (data:any) => {
+        data.products.map((products:any) => {
+          if(products.category2 == 'Top Best Sellers'){ this.bestSeller.push(products) }
+          if(products.category2 == 'Top Fiction'){ this.topFiction.push(products) }
+          if(products.category2 == 'Top New Arrival'){ this.topNewArrival.push(products) }
+        })
+      }
+    )
+  }
+
+
 
   addToWishlist(product: any) {
     if(localStorage.getItem('userLogin') == 'true'){
@@ -54,14 +68,7 @@ export class HomeComponent implements OnInit {
         }
       )
     }else{
-      this.api.addToWishlist(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login')
     }
   }
 
@@ -77,16 +84,14 @@ export class HomeComponent implements OnInit {
         }
       )
     }else {
-      this.api.addToCart(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login');
     }
   }
+
+
+
+
+
 
   displayAllProduct() {
     if (this.check == '') {
@@ -98,34 +103,6 @@ export class HomeComponent implements OnInit {
       this.displayHome = 'none'
     }
   }
-
-  getBestSellers() {
-    this.api.getTopBestSellers().subscribe(
-      (data: any) => {
-        this.bestSeller = data.products;
-      }
-    )
-  }
-
-  getTopFiction() {
-    this.api.getTopFiction().subscribe(
-      (data: any) => {
-        this.topFiction = data.products;
-      }
-    )
-  }
-
-  getNewArrival() {
-    this.api.getTopNewArrival().subscribe(
-      (data: any) => {
-        this.topNewArrival = data.products;
-      }
-    )
-  }
-
-
-
-
 
   // modal
   displayStyle = "none";

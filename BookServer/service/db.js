@@ -11,37 +11,14 @@ const Product = mongoose.model('products', {
   price: Number,
   description: String,
   category: String,
-  home: Number,
+  category2: String,
   image: String,
   date: String,
   discount: Number
 });
 
-const Wishlist = mongoose.model('wishlists', {
-  id: Number,
-  name: String,
-  author: String,
-  price: Number,
-  image: String,
-  description: String,
-  date: String,
-  discount: Number
-})
-
-const Cart = mongoose.model('carts', {
-  id: Number,
-  name: String,
-  author: String,
-  price: Number,
-  image: String,
-  description: String,
-  date: String,
-  discount: Number
-})
-
 const Admin = mongoose.model('admins', {
   id: Number,
-  account: String,
   password: String,
   orders:Array
 })
@@ -58,8 +35,6 @@ const User = mongoose.model('users', {
 
 module.exports = {
   Product,
-  Wishlist,
-  Cart,
   Admin,
   User
 }

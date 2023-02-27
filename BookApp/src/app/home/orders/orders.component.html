@@ -1,7 +1,10 @@
 <div class="container">
     <div class="row  m-5 rounded" *ngFor="let order of orderList" style="background-color:#333; color:white;">
-        <div class="col-12 bg-secondary" style="border-bottom:white 1px solid">
+        <div class="col-8 bg-secondary" style="border-bottom:white 1px solid">
             Order Id: {{order['id']}}
+        </div>
+        <div class="col-4 bg-secondary" style="border-bottom:white 1px solid">
+            status: {{order['status']}}
         </div>
 
         <div class="row w-50" style="border:1px white solid; border-top:none">

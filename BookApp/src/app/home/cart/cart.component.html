@@ -22,7 +22,7 @@
                     <div class="col-8 pt-3">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p class="card-text authorText pt-2">{{product.author}}</p>
-                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <p class="card-text text-danger">{{product.price |currency:'INR':'symbol-narrow'}}</p>
                         <p class="card-text text-success">{{product.discount}}% Off</p>
                         <button class="btn btn-outline-danger" style="font-weight:600"
                             (click)="deleteCart(product, i)">Remove</button>
@@ -89,8 +89,7 @@
             </div>
         </div>
     </div>
-    
-</div>
+</div>  
 
 
 

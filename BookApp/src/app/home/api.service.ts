@@ -16,81 +16,6 @@ export class ApiService {
     return this.http.get('http://localhost:3000/all-products');
   }
 
-  getTopBestSellers() {
-    return this.http.get('http://localhost:3000/top-bestSellers');
-  }
-
-  getTopFiction() {
-    return this.http.get('http://localhost:3000/top-fiction');
-  }
-
-  getTopNewArrival() {
-    return this.http.get('http://localhost:3000/top-newArrival');
-  }
-
-  getAllBestSellers() {
-    return this.http.get('http://localhost:3000/all-bestSellers');
-  }
-
-  getAllFiction() {
-    return this.http.get('http://localhost:3000/all-fiction');
-  }
-
-  getAllNewArrival() {
-    return this.http.get('http://localhost:3000/all-newArrival');
-  }
-
-  addToWishlist(product: any) {
-    const body = {
-      id: product.id,
-      name: product.name,
-      author: product.author,
-      price: product.price,
-      image: product.image,
-      description: product.description,
-      date: product.date,
-      discount: product.discount
-    }
-    return this.http.post('http://localhost:3000/addToWishlist', body);
-  }
-
-  getWishlist() {
-    return this.http.get('http://localhost:3000/getWishlist');
-  }
-
-  deleteWish(id: any) {
-    return this.http.delete('http://localhost:3000/deleteWishlist/' + id);
-  }
-
-  deleteAllWish() {
-    return this.http.delete('http://localhost:3000/deleteAllWishlist');
-  }
-
-  addToCart(product: any) {
-    const body = {
-      id: product.id,
-      name: product.name,
-      author: product.author,
-      price: product.price,
-      image: product.image,
-      description: product.description,
-      date: product.date,
-      discount: product.discount
-    }
-    return this.http.post('http://localhost:3000/addToCart', body);
-  }
-
-  getCart() {
-    return this.http.get('http://localhost:3000/getCart');
-  }
-
-  deleteCart(id: any) {
-    return this.http.delete('http://localhost:3000/deleteCart/' + id);
-  }
-
-  deleteAllCart() {
-    return this.http.delete('http://localhost:3000/deleteAllCart');
-  }
 
   loginAdmin(password: any) {
     const body = {
@@ -100,59 +25,16 @@ export class ApiService {
     return this.http.post('http://localhost:3000/loginAdmin', body);
   }
 
-  changeName(id: any, title: any) {
-    id = Number(id);
+  editProductDetails(id:any, newValue:any, keyValue:any){
     const body = {
-      id: id,
-      newName: title
+      id,
+      newValue,
+      keyValue
     }
-    return this.http.post('http://localhost:3000/editName', body);
+    return this.http.post('http://localhost:3000/editProductDetails', body);
   }
 
-  changeAuthor(id: any, title: any) {
-    id = Number(id);
-    const body = {
-      id: id,
-      newAuthor: title
-    }
-    return this.http.post('http://localhost:3000/editAuthor', body);
-  }
-
-  changePrice(id: any, price: any) {
-    id = Number(id);
-    const body = {
-      id: id,
-      newPrice: price
-    }
-    return this.http.post('http://localhost:3000/editPrice', body);
-  }
-
-  changeCategory(id: any, value: any) {
-    id = Number(id);
-    const body = {
-      id: id,
-      newCategory: value
-    }
-    return this.http.post('http://localhost:3000/changeCategory', body);
-  }
-
-  changeDiscount(id: any, value: any) {
-    id = Number(id);
-    const body = {
-      id: id,
-      newDiscountValue: value
-    }
-    return this.http.post('http://localhost:3000/editDiscount', body);
-  }
-
-  changeDate(id: any, value: any) {
-    id = Number(id);
-    const body = {
-      id: id,
-      newDate: value
-    }
-    return this.http.post('http://localhost:3000/newDate', body);
-  }
+ 
 
   register(firstName:any, lastName:any, email:any, password:any){
     const body = {
@@ -199,9 +81,9 @@ export class ApiService {
     }
     return this.http.post('http://localhost:3000/clearAllWishUser', body);
   }
-  deleteWishUser(id:any, email:any) {
+  deleteWishUser(index:any, email:any) {
     const body = {
-      id,
+      index,
       email
     }
     return this.http.post('http://localhost:3000/deleteWishUser' ,body);
@@ -215,7 +97,6 @@ export class ApiService {
       productList,
       userName
     }
-    console.log(body)
     return this.http.post('http://localhost:3000/addOrder' ,body);
   }
 
@@ -229,7 +110,13 @@ export class ApiService {
     return this.http.get('http://localhost:3000/getOrderAdmin');
   }
 
-
+  delivered(orderId:any, email:any){
+    const body = {
+      orderId,
+      email
+    }
+    return this.http.put('http://localhost:3000/delivered', body);
+  }
 
   addCartToUser(product:any, email:any) {
     const body = {

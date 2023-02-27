@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{product.name}}</h5>
                         <p class="card-text authorText">{{product.author}}</p>
-                        <p class="card-text text-danger">₹{{product.price}}</p>
+                        <p class="card-text text-danger">{{product.price |currency:'INR':'symbol-narrow'}}</p>
                         <div>
                             <button class="btn btn-outline-danger mt-auto mx-3" (click)="addToWishlist(product)"><i
                                     class="fa fa-heart"></i></button>
@@ -43,7 +43,7 @@
                 <h3 class="modal-title">{{modalTitle}}</h3>
             </div>
             <div class="modal-body">
-                <h4 class="text-danger">₹{{modalPrice}}</h4>
+                <h4 class="text-danger">{{modalPrice |currency:'INR':'symbol-narrow'}}</h4>
                 <h5 class="text-success">{{modalDiscount}}% Off</h5>
                 <p>by <b>{{modalAuthor}}</b> </p>
                 <p>{{modalDate}} </p>

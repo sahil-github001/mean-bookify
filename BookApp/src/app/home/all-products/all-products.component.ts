@@ -58,26 +58,37 @@ export class AllProductsComponent implements OnInit {
   }
 
   addToWishlist(product: any) {
-    this.api.addToWishlist(product).subscribe(
-      (result: any) => {
-        alert(result.message);
-      },
-      (result: any) => {
-        alert(result.error.message)
-      }
-    )
-  }
+    if(localStorage.getItem('userLogin') == 'true'){
+      const email = localStorage.getItem('currentEmail');
+      this.api.addWishToUser(product, email).subscribe(
+        (result:any) => {
+          alert(result.message)
+        },
+        (result:any) => {
+          alert(result.error.message)
+        }
+      )
+    }else{
+      alert('please Login')
+    }
+  } 
 
   addToCart(product: any) {
-    this.api.addToCart(product).subscribe(
-      (result: any) => {
-        alert(result.message);
-      },
-      (result: any) => {
-        alert(result.error.message)
-      }
-    )
+    if(localStorage.getItem('userLogin') == 'true'){
+      const email = localStorage.getItem('currentEmail');
+      this.api.addCartToUser(product, email).subscribe(
+        (result:any) => {
+          alert(result.message)
+        },
+        (result:any) => {
+          alert(result.error.message)
+        }
+      )
+    }else {
+      alert('please Login');
+    }
   }
+
 
   // modal
   displayStyle = "none";

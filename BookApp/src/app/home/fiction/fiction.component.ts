@@ -50,9 +50,11 @@ export class FictionComponent implements OnInit {
   }
 
   getAllFiction() {
-    this.api.getAllFiction().subscribe(
-      (data: any) => {
-        this.fiction = data.products;
+    this.api.getAllProducts().subscribe(
+      (data:any) => {
+        data.products.map((products:any) => {
+          if(products.category == 'Fiction'){this.fiction.push(products)}
+        })
       }
     )
   }
@@ -69,14 +71,7 @@ export class FictionComponent implements OnInit {
         }
       )
     }else{
-      this.api.addToWishlist(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login')
     }
   }
 
@@ -92,14 +87,7 @@ export class FictionComponent implements OnInit {
         }
       )
     }else {
-      this.api.addToCart(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
-        (result: any) => {
-          alert(result.error.message)
-        }
-      )
+      alert('please Login')
     }
   }
   // modal

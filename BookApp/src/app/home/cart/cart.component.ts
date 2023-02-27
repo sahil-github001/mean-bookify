@@ -6,6 +6,7 @@ import { ApiService } from '../api.service';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
+
 })
 export class CartComponent implements OnInit {
 
@@ -27,11 +28,11 @@ export class CartComponent implements OnInit {
   allProductDisplay = '';
   check = '';
 
-  name:any;
-  address:any;
-  state:any;
-  city:any;
-  pincode:any;
+  name: any;
+  address: any;
+  state: any;
+  city: any;
+  pincode: any;
 
 
   constructor(private api: ApiService, private router: Router) { }
@@ -61,41 +62,20 @@ export class CartComponent implements OnInit {
   }
 
   getCart() {
-    if(localStorage.getItem('userLogin') == 'true'){
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       this.api.getCartFromUser(email).subscribe(
-        (data:any) => {
+        (data: any) => {
           this.cartList = data.products;
           this.total = 0;
           this.totalDiscount = 0;
-          this.realPrice = 0;
-          if(this.cartList.length == 0){
-            this.errorMsg = 'Empty Cart';
-          } else{
-            this.errorMsg = '';
-            this.cartList.map((item:any) => {
-              this.realPrice += item.price;
-              this.calculateDiscount(item)
-            })
-          }
-        },
-        (data:any) => {
-          this.errorMsg = data.error.message;
-        }
-      )
-    }else{
-      this.api.getCart().subscribe(
-        (data: any) => {
-          this.cartList = data.products;
-          this.total = 0
-          this.totalDiscount = 0
           this.realPrice = 0;
           if (this.cartList.length == 0) {
             this.errorMsg = 'Empty Cart';
           } else {
             this.errorMsg = '';
             this.cartList.map((item: any) => {
-              this.realPrice += item.price
+              this.realPrice += item.price;
               this.calculateDiscount(item)
             })
           }
@@ -104,8 +84,10 @@ export class CartComponent implements OnInit {
           this.errorMsg = data.error.message;
         }
       )
+    } else {
+      alert('please login');
+      this.router.navigateByUrl('');
     }
-    
   }
 
   calculateDiscount(item: any) {
@@ -116,8 +98,8 @@ export class CartComponent implements OnInit {
     this.totalDiscount += result
   }
 
-  deleteCart(product: any, i:any) {
-    if(localStorage.getItem('userLogin') == 'true'){
+  deleteCart(product: any, i: any) {
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       const index = i;
       this.api.deleteCartUser(email, index).subscribe(
@@ -129,89 +111,49 @@ export class CartComponent implements OnInit {
           alert(result.error.message);
         }
       )
-      }else{
-        this.api.deleteCart(product.id).subscribe(
-          (result: any) => {
-            alert(result.message);
-            this.ngOnInit() // Automatic refresh
-    
-            this.cartList = result.wishList
-            // if(this.wishList.length == 0){
-            //   this.e
-            // }
-          },
-          (result: any) => {
-            alert(result.error.message);
-          }
-        )
-      }
+    } else { alert('user not found') }
   }
 
   deleteAllCart() {
-    if(localStorage.getItem('userLogin') == 'true'){
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       this.api.deleteAllCartUser(email).subscribe(
-        (result:any) => {
-          alert(result.message)
-          this.ngOnInit()
-        }
-      )
-    }else{
-      this.api.deleteAllCart().subscribe(
         (result: any) => {
           alert(result.message)
           this.ngOnInit()
         }
       )
-    }
- 
+    } else { alert('user not found') }
   }
 
-  //without alert after order placed
-  deleteAllCart2() {  
-    if(localStorage.getItem('userLogin') == 'true'){
-      const email = localStorage.getItem('currentEmail');
-      this.api.deleteAllCartUser(email).subscribe(
-        (result:any) => {
-          this.ngOnInit()
-        }
-      )
-    }else{
-      this.api.deleteAllCart().subscribe(
-        (result: any) => {
-          this.ngOnInit()
-        }
-      )
-    }
-  }
 
-  orderNow(){
-  
-    if(localStorage.getItem('userLogin') == 'true'){
-      const address:any = {
+
+  orderNow() {
+    if (localStorage.getItem('userLogin') == 'true') {
+      const address: any = {
         name: this.name,
-        address : this.address,
-        state : this.state,
-        city : this.city,
-        pincode : this.pincode
+        address: this.address,
+        state: this.state,
+        city: this.city,
+        pincode: this.pincode
       }
       const total = this.total
-      const email = localStorage.getItem('currentEmail'); 
+      const email = localStorage.getItem('currentEmail');
       const userName = localStorage.getItem('firstName')
       const productList = this.cartList
       this.api.addOrder(address, total, email, productList, userName).subscribe(
-        (result:any) => {
+        (result: any) => {
           alert(result.message)
         },
-        (result:any) => {
+        (result: any) => {
           alert(result.error.message)
         }
       )
-      this.deleteAllCart2()
-      this.router.navigateByUrl('home/orders')
+      this.router.navigateByUrl('home')
     }
-    else{
-      this.router.navigateByUrl('home/login')
+    else {
+      alert('please login');
+      this.router.navigateByUrl('home/login');
     }
   }
 

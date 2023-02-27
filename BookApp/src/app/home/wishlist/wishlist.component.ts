@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class WishlistComponent implements OnInit {
   allProductDisplay = '';
   check = '';
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.getWishlist()
@@ -48,7 +49,7 @@ export class WishlistComponent implements OnInit {
   }
 
   getWishlist() {
-    if(localStorage.getItem('userLogin') == 'true'){
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       this.api.getWishFromUser(email).subscribe(
         (data: any) => {
@@ -56,52 +57,30 @@ export class WishlistComponent implements OnInit {
           if (this.wishList.length == 0) {
             this.errorMsg = 'Empty wishlist';
           }
-           else {
+          else {
             this.errorMsg = '';
           }
         },
         (data: any) => {
           this.errorMsg = data.error.message;
-          if(data.error.message == 'user not found'){
+          if (data.error.message == 'user not found') {
             alert(data.error.message);
           }
         }
       )
-    }else{
-      this.api.getWishlist().subscribe(
-        (data: any) => {
-          this.wishList = data.products;
-          if (this.wishList.length == 0) {
-            this.errorMsg = 'Empty wishlist';
-          } else {
-            this.errorMsg = '';
-          }
-        },
-        (data: any) => {
-          this.errorMsg = data.error.message;
-        }
-      )
+    }
+    else {
+      alert('please Login');
+      this.router.navigateByUrl('');
     }
 
-  
+
   }
 
-  deleteWish(product: any,i:any) {
-    console.log(i);
-    if(localStorage.getItem('userLogin') == 'true'){
-    const email = localStorage.getItem('currentEmail');
-    this.api.deleteWishUser(product.id, email).subscribe(
-      (result: any) => {
-        alert(result.message);
-        this.ngOnInit() // Automatic refresh
-        this.wishList = result.wishList
-      },
-      (result: any) => {
-        alert(result.error.message);
-      }
-    )
-    }else{
-      this.api.deleteWish(product.id).subscribe(
+  deleteWish(i: any) {
+    if (localStorage.getItem('userLogin') == 'true') {
+      const email = localStorage.getItem('currentEmail');
+      this.api.deleteWishUser(i, email).subscribe(
         (result: any) => {
           alert(result.message);
           this.ngOnInit() // Automatic refresh
@@ -111,12 +90,11 @@ export class WishlistComponent implements OnInit {
           alert(result.error.message);
         }
       )
-    }
-
+    } else { alert('user not found') }
   }
 
   deleteAllWish() {
-    if(localStorage.getItem('userLogin') == 'true'){
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       this.api.deleteAllWishUser(email).subscribe(
         (result: any) => {
@@ -124,37 +102,22 @@ export class WishlistComponent implements OnInit {
           this.ngOnInit()
         }
       )
-    }else{
-      this.api.deleteAllWish().subscribe(
-        (result: any) => {
-          alert(result.message)
-          this.ngOnInit()
-        }
-      )
-    }
-  
+    } else { alert('user not found') }
+
   }
+
   addToCart(product: any) {
-    if(localStorage.getItem('userLogin') == 'true'){
+    if (localStorage.getItem('userLogin') == 'true') {
       const email = localStorage.getItem('currentEmail');
       this.api.addCartToUser(product, email).subscribe(
-        (result:any) => {
+        (result: any) => {
           alert(result.message)
         },
-        (result:any) => {
-          alert(result.error.message)
-        }
-      )
-    }else {
-      this.api.addToCart(product).subscribe(
-        (result: any) => {
-          alert(result.message);
-        },
         (result: any) => {
           alert(result.error.message)
         }
       )
-    }
+    } else { alert('user not found') }
   }
 
 
