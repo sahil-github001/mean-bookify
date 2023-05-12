@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+}
+button {
+    text-decoration: none;
+}
+
+.container-fluid {
+    background-color: #20262E;
+}
+
+.part3 a {
+    display: block;
+    color: white;
+    margin: 6px 0;
+}
+
+.share a {
+    display: inline-block;
+    margin: 20px;
+}
+
+.fab {
+    color: #fff;
+    font-size: 25px;
+}
+
+.rights {
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+
+span {
+    color: #fabd61;
+    font-weight: bold;
+    letter-spacing: 3px;
+}

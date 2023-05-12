@@ -1,0 +1,23 @@
+.bookIconImg {
+    width: 100px;
+    height: 150px;
+    transition: .5s;
+}
+
+.bookIconImg:hover {
+    transform: scale(1.07);
+}
+
+.wish {
+    letter-spacing: 3px;
+}
+
+.card-title {
+    color: #20262E;
+    font-weight: 800;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
